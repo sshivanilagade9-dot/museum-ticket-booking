@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Online Museum Ticket Booking</title>
+<style>
+:root{--bg:#faf7f2;--card:#fff;--tx:#2a2622;--mu:#6d665e;--bd:#e0d8cc;--ac:#8a3b1e;--hero:#3b2418;--ht:#f6ece0;--ok:#2f6b3a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1917;--card:#252220;--tx:#efe9e0;--mu:#a69d91;--bd:#3b3631;--ac:#e08b63;--hero:#2a1a12;--ok:#7bc489}}
+*{box-sizing:border-box}html{scroll-padding-top:60px}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 system-ui,sans-serif}
+nav{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:var(--bg);border-bottom:1px solid var(--bd)}
+nav div{display:flex;flex-wrap:wrap;justify-content:flex-end}nav b{font-family:Georgia,serif;font-size:18px}nav a{margin-left:14px;color:var(--tx);font-size:14px;cursor:pointer}
+.hero{background:var(--hero);color:var(--ht);padding:56px 20px;text-align:center}.hero h1{font-family:Georgia,serif;font-size:clamp(28px,6vw,44px);margin:0 0 10px}.hero p{max-width:520px;margin:0 auto;opacity:.85}
+button{background:var(--ac);color:#fff;border:0;border-radius:8px;padding:11px 20px;font:inherit;cursor:pointer}button.s{background:none;color:var(--ac);border:1px solid var(--ac);padding:4px 10px;font-size:13px}
+section{max-width:860px;margin:0 auto;padding:36px 20px 8px}h2{font-family:Georgia,serif;font-size:25px;margin:0 0 4px}.mu{color:var(--mu);font-size:14px}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:16px}
+.c{background:var(--card);border:1px solid var(--bd);border-radius:12px;overflow:hidden}.c svg,.f svg{display:block;width:100%;height:auto}#dbox{max-width:520px}.c .p{padding:14px}.c h3{margin:0 0 4px;font-size:17px}
+.f{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:18px;margin-top:16px}
+label{display:block;font-size:14px;color:var(--mu);margin:10px 0 4px}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit}
+.r{display:grid;grid-template-columns:1fr 1fr;gap:12px}.tot{font-size:20px;font-weight:600;margin-top:12px}
+.msg{margin-top:12px;font-size:14px}.err{color:#c0392b}.ok{color:var(--ok)}.hide{display:none!important}
+.b{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid var(--bd);font-size:14px}
+footer{text-align:center;padding:28px 20px;color:var(--mu);font-size:14px}
+#ai{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:9;display:none}#aib{box-shadow:0 2px 8px rgba(0,0,0,.3)}
+#aip{display:none;flex-direction:column;position:fixed;right:16px;bottom:calc(70px + env(safe-area-inset-bottom,0px));width:min(340px,calc(100vw - 32px));background:var(--card);border:1px solid var(--bd);border-radius:12px;z-index:9;box-shadow:0 4px 16px rgba(0,0,0,.25)}
+#aim{overflow-y:auto;padding:10px;min-height:120px;max-height:45vh;font-size:14px}.m1{margin:6px 0;padding:8px 10px;border-radius:10px;background:var(--bg);white-space:pre-wrap}.m1.u{background:var(--ac);color:#fff;margin-left:28px}
+</style></head><body>
+<nav><b>Museum Tickets</b><div><a data-go="mu">Museums</a><a data-go="bk">Book</a><a data-go="my">My bookings</a><a data-go="ab">About</a><a data-go="ct">Contact</a><a data-go="au" id="na">Login</a></div></nav>
+<div id="pg-museums"><div class="hero"><h1>Online Museum Ticket Booking</h1><p>Search Pune museums, book tickets, add transport and pay online.</p></div>
+
+<section id="mu"><h2>Search museums</h2><div class="mu">User searches Museum (name, location or description)</div>
+<input id="q" placeholder="Search museums..." aria-label="Search museums" style="margin-top:12px"><div class="g" id="mg"></div></section></div>
+<div id="pg-detail" class="hide"><section id="dt"><button class="s" id="back">← All museums</button><div class="f" id="dbox" style="padding:0;overflow:hidden"></div></section></div>
+<div id="pg-about" class="hide"><section id="ab"><h2>About this project</h2><div class="mu">Online Museum Ticket Booking System for Pune</div>
+<div class="f"><p style="margin-top:0">This website lets visitors search Pune museums, view timings and ticket prices, book tickets, add transport and pay online, all in one place.</p>
+<div class="b"><span class="mu">Main parts</span><b>User, Museum, Ticket Booking, Transport, Payment</b></div>
+<div class="b"><span class="mu">Relationships</span><b>Search, Issues, Includes, Confirms</b></div>
+<div class="b"><span class="mu">Frontend</span><b>HTML, CSS, JavaScript (React in the full version)</b></div>
+<div class="b"><span class="mu">Backend</span><b>Spring Boot, PostgreSQL (full version)</b></div></div>
+<div class="f"><b>How booking works</b><p class="mu" style="margin-bottom:0">1. Create an account and log in. 2. Search for a museum and open its details. 3. Choose the date, ticket type, number of tickets and transport. 4. Pay and receive your ticket ID.</p></div></section></div>
+<div id="pg-contact" class="hide"><section id="ct"><h2>Contact us</h2><div class="mu">Questions about bookings or museums? Send us a message.</div>
+<div class="g"><div class="f" style="margin:0"><b>Help desk</b><div class="mu">Email: help@punemuseums.example<br>Phone: +91 00000 00000<br>Mon to Sat, 10:00 to 17:00</div><div class="mu" style="margin-top:8px">Sample contact details for this project.</div></div>
+<div class="f" style="margin:0"><label for="cn">Name</label><input id="cn" autocomplete="name"><label for="ce">Email</label><input id="ce" type="email" autocomplete="email"><label for="cm">Message</label><textarea id="cm" rows="4"></textarea><button id="cs" style="margin-top:14px">Send message</button><div class="msg" id="cr" role="status"></div></div></div></section></div>
+<div id="pg-book" class="hide">
+
+<section id="au"><h2 id="at">Login</h2><div class="mu">Create an account to book tickets.</div>
+<div class="f" id="in"><div id="sw" class="hide"><div class="r"><div><label for="an">Full name</label><input id="an" autocomplete="name"></div><div><label for="ph">Phone no.</label><input id="ph" type="tel" inputmode="numeric" autocomplete="tel"></div></div></div>
+<label for="ae">Email ID</label><input id="ae" type="email" autocomplete="email">
+<div class="r"><div><label for="ap">Password</label><input id="ap" type="password" autocomplete="current-password"></div><div id="cw" class="hide"><label for="ac">Confirm password</label><input id="ac" type="password" autocomplete="new-password"></div></div>
+<div id="uw" class="hide"><label for="ut">User type</label><select id="ut"><option>Visitor</option><option>Admin</option></select></div>
+<button id="ago" style="margin-top:14px">Login</button> <button class="s" id="asw" style="margin-left:8px">New here? Create an account</button>
+<div class="mu" style="margin:16px 0 8px;text-align:center">or</div>
+<button class="s" id="gb" style="width:100%;padding:10px"><b style="color:#4285f4">G</b> Continue with Google</button>
+<div id="gp" class="hide"><div class="mu" style="margin-top:10px">Demo only: enter the Google account details to try the flow.</div><div class="r"><div><label for="gn">Google account name</label><input id="gn" autocomplete="name"></div><div><label for="ge">Google email</label><input id="ge" type="email" autocomplete="email"></div></div><button id="gc" style="margin-top:12px">Continue</button></div><div class="msg err" id="am" role="status"></div></div>
+<div class="f hide" id="out"><div id="who"></div><button id="lo" style="margin-top:14px">Log out</button></div></section>
+
+<section id="bk"><h2>Book tickets</h2><div class="mu">Museum issues Ticket Booking. Transport is included. Payment confirms it.</div>
+<div class="f"><div class="r"><div><label for="bm">Museum</label><select id="bm"></select></div><div><label for="vd">Visit date</label><input type="date" id="vd"></div></div>
+<div class="r"><div><label for="tt">Ticket type</label><select id="tt"></select></div><div><label for="qt">Number of tickets</label><input type="number" id="qt" min="1" max="10" value="1"></div></div>
+<div class="r"><div><label for="tr">Transport (per person)</label><select id="tr"></select></div><div><label for="pm">Payment method</label><select id="pm"><option>UPI</option><option>Card</option><option>Net banking</option><option>Pay at counter</option></select></div></div>
+<div class="tot" id="tot"></div><button id="go" style="margin-top:14px">Pay and confirm</button><div class="msg" id="msg" role="status"></div></div></section>
+
+<section id="my"><h2>My bookings</h2><div class="f"><div id="ls" class="mu">Log in to see your bookings.</div></div></section>
+</div><footer>Pune museum details are for a portfolio project, so confirm hours and prices with each museum. Accounts and bookings are saved in this browser only.</footer>
+<div id="ai"><div id="aip"><div id="aim" aria-live="polite"></div><div style="display:flex;gap:6px;padding:8px;border-top:1px solid var(--bd)"><input id="aiq" placeholder="Ask about museums or booking..." aria-label="Ask the AI assistant"><button id="aisend">Send</button></div></div><button id="aib">Ask AI</button></div>
+<script>
+var MUS=[{id:"M01",name:"Raja Dinkar Kelkar Museum",loc:"Shukrawar Peth, Pune",hrs:"Daily, 10:00 to 17:30",desc:"Over 20,000 everyday Indian craft objects, musical instruments and ornate doors.",c:"#b86b3c",k:"h",p:{Adult:100,Child:30,Student:100},days:"Monday to Sunday",open:"10:00 AM",close:"5:30 PM",closed:"Open all days"},
+{id:"M02",name:"Tribal Cultural Museum",loc:"Koregaon Road, Camp, Pune",hrs:"10:00 to 17:00 (confirm)",desc:"Tribal artefacts, masks, jewellery and replica huts.",c:"#4e6e58",k:"f",p:{Adult:50,Child:25,Student:50},days:"Tuesday to Sunday (sample)",open:"10:00 AM",close:"5:00 PM",closed:"Monday (sample)"},
+{id:"M03",name:"Vikram Pendse Cycle Museum",loc:"Karve Nagar, Pune",hrs:"10:00 to 17:00 (confirm)",desc:"A journey through the history of bicycles.",c:"#7a8f5a",k:"c",p:{Adult:100,Child:100,Student:100},days:"Daily (sample)",open:"10:00 AM",close:"5:00 PM",closed:"None (sample)"},
+{id:"M04",name:"Mahatma Phule Museum",loc:"Central Pune",hrs:"08:00 to 17:00 (confirm)",desc:"Local history and the legacy of Mahatma Phule and Savitribai Phule.",c:"#a8703c",k:"h",p:{Adult:20,Child:10,Student:10},days:"Tuesday to Sunday (sample)",open:"8:00 AM",close:"5:00 PM",closed:"Monday (sample)"}];
+var TT={Adult:0,Child:0,Student:0};function P(){return MUS.filter(function(m){return m.id===$("bm").value})[0].p}
+var TR=[{id:"T00",type:"No transport",price:0,ok:true},{id:"T01",type:"Shuttle bus",price:80,ok:true},{id:"T02",type:"Cab",price:300,ok:true},{id:"T03",type:"Metro feeder",price:40,ok:false}];
+var BK="mt_bookings",UK="mt_users",SK="mt_sess",mem={b:[],u:[],s:null},mode="login";
+function $(i){return document.getElementById(i)}
+function rd(k,d,m){try{return JSON.parse(localStorage.getItem(k)||d)}catch(x){return m}}
+function wr(k,v,m){mem[m]=v;try{localStorage.setItem(k,JSON.stringify(v))}catch(x){}}
+function bks(){return rd(BK,"[]",mem.b)}function usr(){return rd(UK,"[]",mem.u)}function sess(){return rd(SK,"null",mem.s)}
+function esc(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML}
+function today(){return new Date().toISOString().slice(0,10)}
+function rn(n){return Math.floor(Math.pow(10,n-1)+Math.random()*9*Math.pow(10,n-1))}
+function mname(id){return MUS.filter(function(m){return m.id===id})[0].name}
+function hash(p){return crypto.subtle.digest("SHA-256",new TextEncoder().encode(p)).then(function(b){return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0")}).join("")})}
+var PHOTO={M01:"images/kelkar.jpg",M02:"images/tribal.jpg",M03:"images/cycle.jpg",M04:"images/phule.jpg"};
+function art(m){if(PHOTO[m.id])return '<img src="'+PHOTO[m.id]+'" alt="'+m.name+' building" style="display:block;width:100%;aspect-ratio:4/3;object-fit:cover">';var b="",i,s='<svg viewBox="0 0 240 130" role="img" aria-label="'+m.name+' illustration" xmlns="http://www.w3.org/2000/svg">';
+ if(m.k==="c"){b='<rect width="240" height="130" fill="#dfe9d0"/><rect y="112" width="240" height="18" fill="#8a9a78"/><circle cx="72" cy="88" r="24" fill="none" stroke="#33423a" stroke-width="4"/><circle cx="168" cy="88" r="24" fill="none" stroke="#33423a" stroke-width="4"/><path d="M72 88L108 54H146L168 88M108 54L124 88H72M124 88L146 54" fill="none" stroke="#b8452c" stroke-width="4" stroke-linejoin="round"/><rect x="98" y="46" width="20" height="5" fill="#33423a"/><rect x="142" y="44" width="14" height="5" fill="#33423a"/>'}
+ else if(m.k==="h"){b='<rect width="240" height="130" fill="#f1d5b0"/><circle cx="196" cy="26" r="13" fill="#f8ebca"/><polygon points="40,52 120,18 200,52" fill="#e6d8c0"/><rect x="46" y="52" width="148" height="8" fill="#cdbb9c"/>';for(i=0;i<5;i++)b+='<rect x="'+(56+i*28)+'" y="60" width="14" height="44" fill="#f2e8d4"/>';b+='<rect x="40" y="104" width="160" height="8" fill="#cdbb9c"/><rect x="32" y="112" width="176" height="8" fill="#b9a584"/><rect y="120" width="240" height="10" fill="#8a6a4a"/>'}
+ else if(m.k==="d"){b='<rect width="240" height="130" fill="#bfe0f0"/><ellipse cx="120" cy="70" rx="100" ry="14" fill="none" stroke="#fff" stroke-width="2" opacity=".8"/><rect x="62" y="76" width="116" height="44" fill="#d8e6ee"/><path d="M70 76a50 50 0 0 1 100 0z" fill="#4f84a8"/><rect x="118" y="8" width="4" height="20" fill="#44688a"/><circle cx="120" cy="8" r="4" fill="#e0a82e"/>';for(i=0;i<4;i++)b+='<rect x="'+(76+i*26)+'" y="92" width="14" height="28" fill="#6f9bb8"/>';b+='<rect y="120" width="240" height="10" fill="#5d7c68"/>'}
+ else{b='<rect width="240" height="130" fill="#d3e5cf"/><polygon points="40,52 120,24 200,52" fill="#7a3b24"/><rect x="48" y="52" width="144" height="68" fill="#c9593a"/><path d="M104 120v-30a16 16 0 0 1 32 0v30z" fill="#4b2a1c"/>';for(i=0;i<6;i++)b+='<circle cx="'+(62+i*22)+'" cy="68" r="4" fill="#f6e7c8"/>';for(i=0;i<2;i++)b+='<polygon points="'+(66+i*86)+',112 '+(80+i*86)+',112 '+(73+i*86)+',96" fill="#f6e7c8"/>';b+='<rect y="120" width="240" height="10" fill="#6b8a5a"/>'}
+ return s+b+'</svg>'}
+function show(v){["pg-museums","pg-detail","pg-about","pg-contact","pg-book"].forEach(function(i){$(i).classList.toggle("hide",i!==v)});if(v!=="pg-book")window.scrollTo(0,0)}
+function detail(id){var m=MUS.filter(function(x){return x.id===id})[0],rows=[["Open days",m.days],["Opening time",m.open],["Closing time",m.close],["Closed on",m.closed],["Adult ticket","₹"+m.p.Adult],["Child ticket","₹"+m.p.Child],["Student ticket","₹"+m.p.Student]];
+ $("dbox").innerHTML=art(m)+'<div style="padding:18px"><h2>'+m.name+'</h2><div class="mu">'+m.loc+'</div><p>'+m.desc+'</p>'+rows.map(function(r){return '<div class="b"><span class="mu">'+r[0]+'</span><b>'+r[1]+'</b></div>'}).join("")+'<div class="mu" style="margin-top:10px">Items marked sample are placeholders. Confirm with the museum.</div><button data-m="'+m.id+'" style="margin-top:12px">Book tickets for this museum</button></div>';show("pg-detail")}
+function cards(){var q=$("q").value.toLowerCase(),a=MUS.filter(function(m){return (m.name+m.loc+m.desc).toLowerCase().indexOf(q)>-1});
+ $("mg").innerHTML=a.length?a.map(function(m){return '<div class="c">'+art(m)+'<div class="p"><h3>'+m.name+'</h3><div class="mu">'+m.loc+'<br>'+m.hrs+'</div><p style="margin:8px 0">'+m.desc+'</p><button data-d="'+m.id+'">View details</button> <button class="s" data-m="'+m.id+'">Book</button></div></div>'}).join(""):'<div class="mu">No museums match your search.</div>'}
+function cost(){var t=TR.filter(function(x){return x.id===$("tr").value})[0],n=Math.max(1,parseInt($("qt").value)||1);return {t:t,n:n,total:(P()[$("tt").value]+t.price)*n}}
+function upd(){$("tot").textContent="Total: ₹"+cost().total}
+function list(){var s=sess(),a=bks().filter(function(b){return s&&(s.type==="Admin"||b.uid===s.email)});
+ $("ls").innerHTML=s?(a.length?a.map(function(b){return '<div class="b"><span><b>'+b.tid+'</b> · '+esc(mname(b.mid))+'<br>Visit '+b.vdate+' · '+b.qty+' × '+b.type+' · '+esc(b.tr)+'<br>'+b.pay.pid+' · '+b.pay.method+' · '+b.pay.txn+' · <b class="'+(b.pay.status==="Success"?"ok":"")+'">'+b.pay.status+'</b> · ₹'+b.pay.amount+(s.type==="Admin"?'<br>User: '+esc(b.uid):'')+'</span><button class="s" data-id="'+b.tid+'">Cancel</button></div>'}).join(""):"No bookings yet."):"Log in to see your bookings."}
+function authUI(){var s=sess(),su=mode==="signup";
+ $("in").classList.toggle("hide",!!s);$("out").classList.toggle("hide",!s);
+ ["sw","cw","uw"].forEach(function(i){$(i).classList.toggle("hide",!su)});
+ $("at").textContent=s?"My account":su?"Create account":"Login";$("ago").textContent=su?"Create account":"Login";
+ $("asw").textContent=su?"Already have an account? Login":"New here? Create an account";
+ $("na").textContent=s?"Hi, "+s.name.split(" ")[0]:"Login";
+ if(s)$("who").textContent="Signed in as "+s.name+" ("+s.email+", "+s.type+")";list()}
+function book(){var s=sess();
+ if(!s)throw Error("Please log in to book.");
+ var vd=$("vd").value,c=cost();
+ if(!vd||vd<today())throw Error("Pick today or a future date.");
+ if(!c.t.ok)throw Error("This transport is not available.");
+ var cn=$("pm").value==="Pay at counter",b={tid:"TKT"+rn(4),uid:s.email,mid:$("bm").value,bdate:today(),vdate:vd,type:$("tt").value,qty:c.n,price:P()[$("tt").value],trid:c.t.id,tr:c.t.type,
+  pay:{pid:"PAY"+rn(4),method:$("pm").value,amount:c.total,txn:cn?"-":"TXN"+rn(8),status:cn?"Pending":"Success"}};
+ var a=bks();a.push(b);wr(BK,a,"b");return b}
+MUS.forEach(function(m){$("bm").add(new Option(m.name,m.id))});
+function fillTT(){var v=$("tt").value;$("tt").innerHTML="";Object.keys(TT).forEach(function(k){$("tt").add(new Option(k+" (₹"+P()[k]+")",k))});if(v)$("tt").value=v}fillTT();
+TR.forEach(function(t){var o=new Option(t.type+" (₹"+t.price+")"+(t.ok?"":" - unavailable"),t.id);o.disabled=!t.ok;$("tr").add(o)});
+$("vd").value=today();$("vd").min=today();
+["tt","qt","tr"].forEach(function(i){$(i).addEventListener("input",upd)});$("bm").addEventListener("input",function(){fillTT();upd()});$("q").addEventListener("input",cards);
+$("go").onclick=function(){var m=$("msg");try{var b=book();m.className="msg ok";m.textContent="Booked! Ticket "+b.tid+", payment "+b.pay.pid+" ("+b.pay.status+"), ₹"+b.pay.amount;list()}catch(x){m.className="msg err";m.textContent=x.message}};
+document.addEventListener("click",function(e){var t=e.target,g=t.getAttribute("data-go"),m=t.getAttribute("data-m"),id=t.getAttribute("data-id");
+ if(m){show("pg-book");$("bm").value=m;fillTT();upd();$("bk").scrollIntoView({behavior:"smooth"})}
+ if(t.getAttribute("data-d"))detail(t.getAttribute("data-d"));if(t.id==="back")show("pg-museums");
+ if(g){show(g==="mu"?"pg-museums":g==="ab"?"pg-about":g==="ct"?"pg-contact":"pg-book");$(g).scrollIntoView({behavior:"smooth"})}
+ if(id){wr(BK,bks().filter(function(b){return b.tid!==id}),"b");list()}});
+$("asw").onclick=function(){mode=mode==="signup"?"login":"signup";$("am").textContent="";authUI()};
+$("lo").onclick=function(){wr(SK,null,"s");authUI()};
+$("ago").onclick=function(){var m=$("am"),n=$("an").value.trim(),e=$("ae").value.trim().toLowerCase(),p=$("ap").value,ph=$("ph").value.trim(),su=mode==="signup";m.className="msg err";
+ if(su&&!n){m.textContent="Enter your name.";return}
+ if(su&&!/^\d{10}$/.test(ph)){m.textContent="Enter a 10-digit phone number.";return}
+ if(!/^\S+@\S+\.\S+$/.test(e)){m.textContent="Enter a valid email.";return}
+ if(p.length<6){m.textContent="Password must be at least 6 characters.";return}
+ if(su&&p!==$("ac").value){m.textContent="Passwords do not match.";return}
+ hash(e+":"+p).then(function(h){var us=usr(),u=us.filter(function(x){return x.email===e})[0];
+  if(su){if(u){m.textContent="An account with this email already exists.";return}u={uid:"U"+rn(4),name:n,phone:ph,email:e,h:h,type:$("ut").value};us.push(u);wr(UK,us,"u")}
+  else if(!u||u.h!==h){m.textContent="Wrong email or password.";return}
+  wr(SK,{name:u.name,email:u.email,type:u.type},"s");$("ap").value="";$("ac").value="";m.textContent="";authUI();$("bk").scrollIntoView({behavior:"smooth"})}).catch(function(){m.textContent="Could not process the password in this browser."})};
+$("cs").onclick=function(){var r=$("cr"),n=$("cn").value.trim(),e=$("ce").value.trim(),t=$("cm").value.trim();r.className="msg err";
+ if(!n){r.textContent="Enter your name.";return}
+ if(!/^\S+@\S+\.\S+$/.test(e)){r.textContent="Enter a valid email.";return}
+ if(t.length<10){r.textContent="Write a message of at least 10 characters.";return}
+ var a=rd("mt_msgs","[]",mem.m||[]);a.push({id:"MSG"+rn(4),name:n,email:e,text:t,date:today()});wr("mt_msgs",a,"m");
+ r.className="msg ok";r.textContent="Thank you, "+n+". Your message was saved (ID "+a[a.length-1].id+").";$("cm").value=""};
+$("gb").onclick=function(){$("gp").classList.toggle("hide")};
+$("gc").onclick=function(){var m=$("am"),n=$("gn").value.trim(),e=$("ge").value.trim().toLowerCase();m.className="msg err";
+ if(!n){m.textContent="Enter your Google account name.";return}
+ if(!/^\S+@\S+\.\S+$/.test(e)){m.textContent="Enter a valid Google email.";return}
+ var us=usr(),u=us.filter(function(x){return x.email===e})[0];
+ if(!u){u={uid:"U"+rn(4),name:n,phone:"",email:e,h:"",type:"Visitor",provider:"google"};us.push(u);wr(UK,us,"u")}
+ else if(u.h){m.textContent="This email already has a password account. Please log in with your password.";return}
+ wr(SK,{name:u.name,email:u.email,type:u.type},"s");m.textContent="";$("gp").classList.add("hide");authUI();$("bk").scrollIntoView({behavior:"smooth"})};
+var hist=[];
+function aiAdd(t,u){var d=document.createElement("div");d.className="m1"+(u?" u":"");d.textContent=t;$("aim").appendChild(d);$("aim").scrollTop=1e9;return d}
+function aiCtx(){return "You are the helpful assistant on a Pune museum ticket booking website. Answer briefly (maximum 4 sentences) using only this data: "+JSON.stringify(MUS.map(function(m){return {name:m.name,location:m.loc,openDays:m.days,opens:m.open,closes:m.close,closedOn:m.closed,description:m.desc,pricesInRupees:m.p}}))+" Transport options per person in rupees: "+JSON.stringify(TR.map(function(t){return {type:t.type,price:t.price,available:t.ok}}))+". Booking steps: create an account and log in, open a museum, choose date, ticket type, number of tickets and transport, then pay by UPI, Card, Net banking or Pay at counter. Anything marked sample is a placeholder, so tell the visitor to confirm with the museum. If the question is unrelated, say you can only help with these museums and bookings."}
+if(window.claude&&claude.use)claude.use("sample").then(function(sm){if(!sm)return;$("ai").style.display="block";
+ $("aib").onclick=function(){var p=$("aip");p.style.display=p.style.display==="flex"?"none":"flex";if(!$("aim").children.length)aiAdd("Hi! Ask me about museum timings, ticket prices, transport or how to book.")};
+ function send(){var q=$("aiq").value.trim();if(!q)return;$("aiq").value="";aiAdd(q,true);hist.push({role:"user",content:q});var w=aiAdd("Thinking...");
+  var tx=hist.slice(-6).map(function(h){return (h.role==="user"?"Visitor: ":"Assistant: ")+h.content}).join("\n");
+  sm(aiCtx()+"\n\nConversation:\n"+tx+"\nAssistant:",{cache:false,modelTier:"quick"}).then(function(r){w.textContent=r.text;hist.push({role:"assistant",content:r.text})}).catch(function(e){w.textContent=e&&e.code==="not_granted"?"AI help was not allowed. Reload the page and accept to use it.":"Sorry, the assistant is busy. Please try again soon."})}
+ $("aisend").onclick=send;$("aiq").addEventListener("keydown",function(e){if(e.key==="Enter")send()})}).catch(function(){});
+cards();upd();authUI();
+</script></body></html>
